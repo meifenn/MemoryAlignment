@@ -25,7 +25,17 @@ int main()
 
 	size_t poolSize = 1000;
 	void* pool = std::malloc(poolSize); //mem allocate
-	*reinterpret_cast<int*>(pool) = 5;
+
+	//int* p_int = reinterpret_cast<int*>(pool); 
+	//*p_int = 5; //point to 0 byte from start
+	//*(p_int + 1) = 6;// point to 4 bytes from start
+	//*(p_int + 2) = 7;//point to 8 bytes from start
+
+	char* p_char = reinterpret_cast<char*>(pool);
+	*p_char = 5; //point to 0 byte from start
+	*(p_char + 4) = 6;// point to 4 bytes from start
+	*(p_char + 8) = 7;//point to 8 bytes from start
+
 	std::cout << *reinterpret_cast<int*>(pool);
 	std::free(pool);// free the memory
 
